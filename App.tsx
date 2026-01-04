@@ -81,7 +81,7 @@ const LoginScreen = ({ onLogin }: { onLogin: () => void }) => {
           Educador IA
         </h1>
         <p className="text-xl md:text-2xl text-indigo-200 font-light mb-8 max-w-2xl mx-auto leading-relaxed">
-          BNCC Pro Edition
+          Edição Pro BNCC
         </p>
         <p className="text-white/80 text-base md:text-lg mb-12 max-w-lg mx-auto leading-relaxed font-light">
           O assistente pedagógico inteligente que transforma seu planejamento. 
