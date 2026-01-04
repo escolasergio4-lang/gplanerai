@@ -285,9 +285,9 @@ const App = () => {
     let prompt = gen.prompt(data);
     if (Object.keys(personalization).length > 0) {
       let context = "\n\nCONTEXTO DO PROFESSOR:\n";
-      if(personalization.professorName) context += `- Nome: ${personalization.professorName}\n`;
-      if(personalization.schoolName) context += `- Escola: ${personalization.schoolName}\n`;
-      if(personalization.didacticUnit) context += `- Unidade: ${personalization.didacticUnit}\n`;
+      if(personalization.Nome do Professor) context += `- Nome: ${personalization.professorName}\n`;
+      if(personalization.Noma da Escola) context += `- Escola: ${personalization.schoolName}\n`;
+      if(personalization.Unidade Didática) context += `- Unidade: ${personalization.didacticUnit}\n`;
       prompt += context;
     }
     return prompt;
