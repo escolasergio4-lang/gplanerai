@@ -7,7 +7,7 @@ import { generateContent } from './services/aiService';
 
 // 1. Icon Helper (using FontAwesome classes)
 const Icon = ({ name, className = "" }: { name: string; className?: string }) => (
-  <i class={`fas ${name} ${className}`} />
+  <i className={`fas ${name} ${className}`} />
 );
 
 // Success Toast Component
@@ -186,11 +186,15 @@ const Sidebar = ({
               className={`w-full text-left px-4 py-3 flex items-center gap-4 rounded-xl transition-all group ${selectedId === gen.id ? 'bg-indigo-50 border-l-4 border-indigo-600' : 'hover:bg-slate-50 border-l-4 border-transparent'}`}
             >
               <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${selectedId === gen.id ? 'bg-indigo-100 text-indigo-600' : 'bg-slate-100 text-slate-500 group-hover:bg-indigo-50 group-hover:text-indigo-500'}`}>
-                <Icon name={gen.icon} />
+                <Icon name="fa-chalkboard-teacher" className={selectedId === gen.id ? '' : 'text-slate-400'} />
+                {gen.icon && <Icon name={gen.icon} className="absolute opacity-0" />} 
               </div>
               <div className="min-w-0">
-                <div className={`font-semibold text-sm truncate ${selectedId === gen.id ? 'text-indigo-700' : 'text-slate-700'}`}>{gen.title}</div>
-                <div className="text-xs text-slate-400 truncate">{gen.description}</div>
+                 <div className="flex items-center gap-2">
+                    <Icon name={gen.icon} className={`text-xs ${selectedId === gen.id ? 'text-indigo-500' : 'text-slate-400'}`} />
+                    <div className={`font-semibold text-sm truncate ${selectedId === gen.id ? 'text-indigo-700' : 'text-slate-700'}`}>{gen.title}</div>
+                 </div>
+                <div className="text-xs text-slate-400 truncate pl-5">{gen.description}</div>
               </div>
             </button>
           ))}
@@ -492,7 +496,7 @@ const App = () => {
             </div>
           ) : (
             /* Generator Form */
-            <div className="max-w-4xl mx-auto p-6 md:p-10 animate-fade-in pb-32">
+            <div className="max-w-4xl mx-auto p-6 md:p-10 animate-fade-in pb-6">
               <div className="mb-8">
                  <div className="flex items-center gap-4 mb-2">
                     <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
@@ -544,16 +548,19 @@ const App = () => {
                     </div>
                  ))}
                  
-                 <div className="fixed bottom-0 left-0 md:left-80 right-0 p-4 bg-white/80 backdrop-blur-md border-t border-slate-200 flex items-center justify-between z-20">
-                    <button type="button" onClick={handleCopyPrompt} className="text-indigo-600 font-semibold px-4 py-2 hover:bg-indigo-50 rounded-lg transition-colors">
-                        <Icon name="fa-copy" className="mr-2" /> Copiar Prompt
+                 {/* SPACER DIV - Ensures content is scrollable above fixed footer */}
+                 <div className="h-28 md:h-32" aria-hidden="true" />
+                 
+                 <div className="fixed bottom-0 left-0 md:left-80 right-0 px-6 py-3 bg-white/95 backdrop-blur-xl border-t border-slate-200 flex items-center justify-between z-30 shadow-lg">
+                    <button type="button" onClick={handleCopyPrompt} className="text-indigo-600 font-semibold px-4 py-2 hover:bg-indigo-50 rounded-lg transition-colors text-sm md:text-base">
+                        <Icon name="fa-copy" className="mr-2" /> <span className="hidden sm:inline">Copiar Prompt</span><span className="sm:hidden">Copiar</span>
                     </button>
                     <div className="flex gap-3">
-                        <button type="button" onClick={() => { setFormData({}); (document.querySelector('form') as HTMLFormElement).reset(); }} className="px-5 py-2.5 text-slate-500 hover:text-slate-700 font-medium">
+                        <button type="button" onClick={() => { setFormData({}); (document.querySelector('form') as HTMLFormElement).reset(); }} className="px-4 py-2 text-slate-500 hover:text-slate-700 font-medium text-sm md:text-base">
                             Limpar
                         </button>
-                        <button type="submit" className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-2.5 rounded-xl font-bold shadow-lg shadow-indigo-200 hover:shadow-indigo-300 hover:-translate-y-0.5 transition-all flex items-center gap-2">
-                            <Icon name="fa-wand-magic-sparkles" /> Gerar Conteúdo
+                        <button type="submit" className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-indigo-200 hover:shadow-indigo-300 hover:-translate-y-0.5 transition-all flex items-center gap-2 text-sm md:text-base">
+                            <Icon name="fa-wand-magic-sparkles" /> <span className="hidden sm:inline">Gerar Conteúdo</span><span className="sm:hidden">Gerar</span>
                         </button>
                     </div>
                  </div>
